@@ -1,7 +1,7 @@
 import React from 'react';
 
-const issues = () => {
-  return <div>issues</div>;
+const Issues = () => {
+  return <div>Issues</div>;
 };
 
-export default issues;
+export default Issues;
