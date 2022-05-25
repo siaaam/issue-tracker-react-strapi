@@ -10,7 +10,7 @@ const defaultIssue = {
   endDate: '',
   priority: 'low',
   status: 'new',
-  completedPercentage: 0,
+  completedPercentage: 1,
 };
 
 const AddIssue = ({ addIssue }) => {

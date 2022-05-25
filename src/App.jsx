@@ -31,6 +31,16 @@ function App() {
 
   const addIssue = (issue) => {
     setIssues([...issues, issue]);
+    setTotalCount((prevCount) => prevCount + 1);
+    if (issue.status === 'new') {
+      setNewCount((prevCount) => prevCount + 1);
+    }
+    if (issue.status === 'inProgress') {
+      setInprogressCount((prevCount) => prevCount + 1);
+    }
+    if (issue.status === 'completed') {
+      setCompletedCount((prevCount) => prevCount + 1);
+    }
   };
   console.log(issues);
   return (
