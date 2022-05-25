@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import { v4 as uuid } from 'uuid';
 
-const AddIssue = () => {
-  const [issue, setIssue] = useState({
-    title: '',
-    subTitle: '',
-    assignedTo: '',
-    startDate: '',
-    endDate: '',
-    priority: 'low',
-    status: 'new',
-    completedPercentage: 0,
-  });
+const defaultIssue = {
+  title: '',
+  subTitle: '',
+  assignedTo: '',
+  startDate: '',
+  endDate: '',
+  priority: 'low',
+  status: 'new',
+  completedPercentage: 0,
+};
+
+const AddIssue = ({ addIssue }) => {
+  const [issue, setIssue] = useState(defaultIssue);
 
   const [errors, setErrors] = useState({
     title: '',
@@ -70,6 +73,7 @@ const AddIssue = () => {
           endDate: 'End Date is required',
         }));
       }
+
       if (priority === '') {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -81,7 +85,8 @@ const AddIssue = () => {
     const isValid = Object.values(issue).every((elm) => elm);
 
     if (isValid) {
-      console.log(issue);
+      addIssue({ ...issue, id: uuid() });
+      setIssue(defaultIssue);
     }
   };
 
