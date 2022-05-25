@@ -20,7 +20,7 @@ function App() {
       endDate: '',
       priority: 'low',
       status: 'new',
-      completedPercentage: 12,
+      completedPercentage: 80,
     },
   ]);
 

@@ -33,6 +33,14 @@ const Issues = ({ issues }) => {
             const lowClass = priority === 'low' ? 'primary' : '';
             const highClass = priority === 'high' ? 'danger' : '';
             const mediumClass = priority === 'medium' ? 'info' : '';
+            const lowPercentageClass =
+              completedPercentage <= 30 ? 'danger' : '';
+            const mediumPercentageClass =
+              completedPercentage > 30 && completedPercentage < 70
+                ? 'info'
+                : '';
+            const highPercentageClass =
+              completedPercentage > 70 ? 'success' : '';
             return (
               <tr key={id}>
                 <td>{id}</td>
@@ -45,7 +53,18 @@ const Issues = ({ issues }) => {
                 <td>{status}</td>
                 <td>{endDate}</td>
                 <td>{assignedTo}</td>
-                <td>{completedPercentage} %</td>
+                <td>
+                  {
+                    <ProgressBar
+                      variant={`${lowPercentageClass}${mediumPercentageClass}${highPercentageClass}`}
+                      className="mt-1"
+                      animated
+                      striped
+                      now={completedPercentage}
+                      label={`${completedPercentage}%`}
+                    />
+                  }
+                </td>
                 <td>
                   <div
                     className="d-flex justify-content-between align-items-center"
