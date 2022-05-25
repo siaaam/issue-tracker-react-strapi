@@ -10,6 +10,11 @@ body {
   font-family: 'Recursive' !important;
 }
 
+form label {
+  font-style: italic;
+  font-weight: 300;
+}
+
 .issue-brand {
   font-family: 'Lobster', sans-serif;
   font-size: 1.5rem !important;
