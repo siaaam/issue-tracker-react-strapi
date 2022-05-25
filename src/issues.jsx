@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Badge, ProgressBar } from 'react-bootstrap';
 import { FaTrash, FaCheckSquare, FaEdit } from 'react-icons/fa';
 
 const Issues = ({ issues }) => {
@@ -30,11 +30,18 @@ const Issues = ({ issues }) => {
               assignedTo,
               completedPercentage,
             } = issue;
+            const lowClass = priority === 'low' ? 'primary' : '';
+            const highClass = priority === 'high' ? 'danger' : '';
+            const mediumClass = priority === 'medium' ? 'info' : '';
             return (
               <tr key={id}>
                 <td>{id}</td>
                 <td>{title}</td>
-                <td>{priority}</td>
+                <td>
+                  <Badge pill bg={`${lowClass}${highClass}${mediumClass}`}>
+                    {priority}
+                  </Badge>
+                </td>
                 <td>{status}</td>
                 <td>{endDate}</td>
                 <td>{assignedTo}</td>
