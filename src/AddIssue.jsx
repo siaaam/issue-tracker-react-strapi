@@ -169,7 +169,7 @@ const AddIssue = ({ addIssue }) => {
               id="assignedTo"
               onChange={handleChange}
               value={assignedTo}
-              placeholder="Enter Your Task Name"
+              placeholder="Whom You Are Assigned To"
               isInvalid={errorAssignedTo}
             />
             <Form.Control.Feedback type="invalid" className="d-block">

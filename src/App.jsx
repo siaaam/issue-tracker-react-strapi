@@ -24,6 +24,11 @@ function App() {
     },
   ]);
 
+  const [totalCount, setTotalCount] = useState(0);
+  const [newCount, setNewCount] = useState(0);
+  const [inProgressCount, setInprogressCount] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
+
   const addIssue = (issue) => {
     setIssues([...issues, issue]);
   };
@@ -34,7 +39,12 @@ function App() {
       <Col sm={{ span: 10, offset: 2 }}>
         <Container>
           <AddIssue addIssue={addIssue} />
-          <IssueBar />
+          <IssueBar
+            totalCount={totalCount}
+            newCount={newCount}
+            inProgressCount={inProgressCount}
+            completedCount={completedCount}
+          />
           <Issues issues={issues} />
         </Container>
       </Col>
