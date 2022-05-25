@@ -9,8 +9,8 @@ const Navigation = () => {
           Issue Tracker
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse>
-          <Nav className="me-auto">
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Issues</Nav.Link>
           </Nav>
