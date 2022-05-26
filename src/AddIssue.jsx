@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { v4 as uuid } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 const defaultIssue = {
   title: '',
@@ -14,6 +16,7 @@ const defaultIssue = {
 };
 
 const AddIssue = ({ addIssue }) => {
+  const navigate = useNavigate();
   const [issue, setIssue] = useState(defaultIssue);
 
   const [errors, setErrors] = useState({
@@ -87,6 +90,8 @@ const AddIssue = ({ addIssue }) => {
     if (isValid) {
       addIssue({ ...issue, id: uuid() });
       setIssue(defaultIssue);
+      toast.success('Issue Added Successfully');
+      navigate('/issues');
     }
   };
 
