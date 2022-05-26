@@ -4,6 +4,8 @@ import { FaTrash, FaCheckSquare, FaEdit } from 'react-icons/fa';
 
 import { Badge, ProgressBar, Modal, Button } from 'react-bootstrap';
 
+import { toast } from 'react-toastify';
+
 const Issue = ({ issue, completeIssue, deleteIssue }) => {
   const {
     id,
@@ -20,6 +22,7 @@ const Issue = ({ issue, completeIssue, deleteIssue }) => {
     //   check if this is triggered by delete button
     if (e.target.dataset.action === 'delete') {
       deleteIssue(id);
+      toast.success('Issue is deleted');
     }
     // confirm delete action if button is clicked
 

@@ -1,5 +1,6 @@
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navigation from './Navigation';
 import Issues from './issues';
@@ -7,6 +8,8 @@ import AddIssue from './AddIssue';
 
 import { Row, Col, Container } from 'react-bootstrap';
 import { useState } from 'react';
+
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [issues, setIssues] = useState([
@@ -68,24 +71,33 @@ function App() {
   };
 
   return (
-    <Row>
-      <Navigation />
-      <Col sm={{ span: 10, offset: 2 }}>
-        <Container>
-          <AddIssue addIssue={addIssue} />
+    <>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+      />
+      <Row>
+        <Navigation />
+        <Col sm={{ span: 10, offset: 2 }}>
+          <Container>
+            <AddIssue addIssue={addIssue} />
 
-          <Issues
-            issues={issues}
-            totalCount={totalCount}
-            newCount={newCount}
-            inProgressCount={inProgressCount}
-            completedCount={completedCount}
-            completeIssue={completeIssue}
-            deleteIssue={deleteIssue}
-          />
-        </Container>
-      </Col>
-    </Row>
+            <Issues
+              issues={issues}
+              totalCount={totalCount}
+              newCount={newCount}
+              inProgressCount={inProgressCount}
+              completedCount={completedCount}
+              completeIssue={completeIssue}
+              deleteIssue={deleteIssue}
+            />
+          </Container>
+        </Col>
+      </Row>
+    </>
   );
 }
 
