@@ -42,6 +42,26 @@ function App() {
     }
   };
 
+  const completeIssue = (id) => {
+    console.log(id);
+    // get the issue object based on id
+    // modify the object with completed logic
+    // change the state for re render
+
+    const issuesAfterCompletion = issues.map((issue) => {
+      if (issue.id === id) {
+        return {
+          ...issue,
+          completedPercentage: 100,
+          status: 'completed',
+        };
+      } else {
+        return issue;
+      }
+    });
+    setIssues(issuesAfterCompletion);
+  };
+
   return (
     <Row>
       <Navigation />
@@ -55,6 +75,7 @@ function App() {
             newCount={newCount}
             inProgressCount={inProgressCount}
             completedCount={completedCount}
+            completeIssue={completeIssue}
           />
         </Container>
       </Col>

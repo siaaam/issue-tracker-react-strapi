@@ -9,6 +9,7 @@ const Issues = ({
   newCount,
   inProgressCount,
   completedCount,
+  completeIssue,
 }) => {
   return (
     <>
@@ -34,7 +35,7 @@ const Issues = ({
         </thead>
         <tbody>
           {issues.map((issue) => (
-            <Issue key={issue.id} issue={issue} />
+            <Issue key={issue.id} issue={issue} completeIssue={completeIssue} />
           ))}
         </tbody>
       </Table>

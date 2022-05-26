@@ -4,7 +4,7 @@ import { FaTrash, FaCheckSquare, FaEdit } from 'react-icons/fa';
 
 import { Badge, ProgressBar } from 'react-bootstrap';
 
-const Issue = ({ issue }) => {
+const Issue = ({ issue, completeIssue }) => {
   const {
     id,
     title,
@@ -14,6 +14,7 @@ const Issue = ({ issue }) => {
     assignedTo,
     completedPercentage,
   } = issue;
+
   const lowClass = priority === 'low' ? 'primary' : '';
   const highClass = priority === 'high' ? 'danger' : '';
   const mediumClass = priority === 'medium' ? 'info' : '';
@@ -21,6 +22,15 @@ const Issue = ({ issue }) => {
   const mediumPercentageClass =
     completedPercentage > 30 && completedPercentage < 70 ? 'info' : '';
   const highPercentageClass = completedPercentage > 70 ? 'success' : '';
+  const completedStatus =
+    status === 'completed' ? (
+      <span style={{ textDecoration: 'line-through', color: 'red' }}>
+        completed
+      </span>
+    ) : (
+      status
+    );
+
   return (
     <tr key={id}>
       <td>{id}</td>
@@ -30,7 +40,7 @@ const Issue = ({ issue }) => {
           {priority}
         </Badge>
       </td>
-      <td>{status}</td>
+      <td>{completedStatus}</td>
       <td>{endDate}</td>
       <td>{assignedTo}</td>
       <td>
@@ -51,7 +61,10 @@ const Issue = ({ issue }) => {
           style={{ height: '21px' }}
         >
           <FaEdit className="text-info" />
-          <FaCheckSquare className="text-success" />
+          <FaCheckSquare
+            className="text-success"
+            onClick={() => completeIssue(id)}
+          />
           <FaTrash className="text-danger" />
         </div>
       </td>
