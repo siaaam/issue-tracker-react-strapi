@@ -42,6 +42,11 @@ function App() {
     }
   };
 
+  const deleteIssue = (id) => {
+    const issuesAfterDelete = issues.filter((issue) => issue.id !== id);
+    setIssues(issuesAfterDelete);
+  };
+
   const completeIssue = (id) => {
     console.log(id);
     // get the issue object based on id
@@ -76,6 +81,7 @@ function App() {
             inProgressCount={inProgressCount}
             completedCount={completedCount}
             completeIssue={completeIssue}
+            deleteIssue={deleteIssue}
           />
         </Container>
       </Col>
