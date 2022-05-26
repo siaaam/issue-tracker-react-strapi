@@ -6,7 +6,10 @@ import { Badge, ProgressBar, Modal, Button } from 'react-bootstrap';
 
 import { toast } from 'react-toastify';
 
+import { useNavigate } from 'react-router-dom';
+
 const Issue = ({ issue, completeIssue, deleteIssue }) => {
+  const navigate = useNavigate();
   const {
     id,
     title,
@@ -91,7 +94,10 @@ const Issue = ({ issue, completeIssue, deleteIssue }) => {
             className="d-flex justify-content-between align-items-center"
             style={{ height: '21px' }}
           >
-            <FaEdit className="text-info" />
+            <FaEdit
+              className="text-info"
+              onClick={() => navigate(`/edit/${id}`)}
+            />
             <FaCheckSquare
               className="text-success"
               onClick={() => completeIssue(id)}

@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
+import EditIssue from './EditIssue';
 
 function App() {
   const [issues, setIssues] = useState([
@@ -36,8 +37,10 @@ function App() {
   const [completedCount, setCompletedCount] = useState(0);
 
   const addIssue = (issue) => {
-    setIssues([...issues, issue]);
+    setIssues((prevIssues) => [...prevIssues, issue]);
+
     setTotalCount((prevCount) => prevCount + 1);
+
     if (issue.status === 'new') {
       setNewCount((prevCount) => prevCount + 1);
     }
@@ -55,7 +58,6 @@ function App() {
   };
 
   const completeIssue = (id) => {
-    console.log(id);
     // get the issue object based on id
     // modify the object with completed logic
     // change the state for re render
@@ -72,6 +74,24 @@ function App() {
       }
     });
     setIssues(issuesAfterCompletion);
+  };
+
+  const updateIssue = (issueToUpdate) => {
+    console.log(issueToUpdate);
+    console.log(issues);
+    const issuesAfterUpdate = issues.map((issue) => {
+      console.log(issue);
+      if (issueToUpdate.id === issue.id) {
+        return {
+          ...issueToUpdate,
+          id: issue.id,
+        };
+      } else {
+        return issue;
+      }
+    });
+    console.log(issuesAfterUpdate);
+    setIssues(issuesAfterUpdate);
   };
 
   return (
@@ -91,6 +111,16 @@ function App() {
               <Routes>
                 <Route path="/" index element={<Home />} />
                 <Route path="/add" element={<AddIssue addIssue={addIssue} />} />
+                <Route
+                  path="/edit/:id"
+                  element={
+                    <EditIssue
+                      issues={issues}
+                      addIssue={addIssue}
+                      updateIssue={updateIssue}
+                    />
+                  }
+                />
                 <Route
                   path="/issues"
                   element={
