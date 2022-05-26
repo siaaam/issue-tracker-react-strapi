@@ -1,7 +1,6 @@
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-import IssueBar from './IssueBar';
 import Navigation from './Navigation';
 import Issues from './issues';
 import AddIssue from './AddIssue';
@@ -42,20 +41,21 @@ function App() {
       setCompletedCount((prevCount) => prevCount + 1);
     }
   };
-  console.log(issues);
+
   return (
     <Row>
       <Navigation />
       <Col sm={{ span: 10, offset: 2 }}>
         <Container>
           <AddIssue addIssue={addIssue} />
-          <IssueBar
+
+          <Issues
+            issues={issues}
             totalCount={totalCount}
             newCount={newCount}
             inProgressCount={inProgressCount}
             completedCount={completedCount}
           />
-          <Issues issues={issues} />
         </Container>
       </Col>
     </Row>
