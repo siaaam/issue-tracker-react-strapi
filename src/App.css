@@ -20,3 +20,7 @@ form label {
   font-size: 1.5rem !important;
   margin-right: auto !important;
 }
+
+.active {
+  color: cornflowerblue !important;
+}

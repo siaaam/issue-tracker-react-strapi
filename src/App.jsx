@@ -5,11 +5,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navigation from './Navigation';
 import Issues from './issues';
 import AddIssue from './AddIssue';
+import Home from './Home';
 
 import { Row, Col, Container } from 'react-bootstrap';
 import { useState } from 'react';
 
 import { ToastContainer } from 'react-toastify';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NotFound from './NotFound';
 
 function App() {
   const [issues, setIssues] = useState([
@@ -80,22 +84,32 @@ function App() {
         closeOnClick
       />
       <Row>
-        <Navigation />
-        <Col sm={{ span: 10, offset: 2 }}>
-          <Container>
-            <AddIssue addIssue={addIssue} />
-
-            <Issues
-              issues={issues}
-              totalCount={totalCount}
-              newCount={newCount}
-              inProgressCount={inProgressCount}
-              completedCount={completedCount}
-              completeIssue={completeIssue}
-              deleteIssue={deleteIssue}
-            />
-          </Container>
-        </Col>
+        <BrowserRouter>
+          <Navigation />
+          <Col sm={{ span: 10, offset: 2 }}>
+            <Container>
+              <Routes>
+                <Route path="/" index element={<Home />} />
+                <Route path="/add" element={<AddIssue addIssue={addIssue} />} />
+                <Route
+                  path="/issues"
+                  element={
+                    <Issues
+                      issues={issues}
+                      totalCount={totalCount}
+                      newCount={newCount}
+                      inProgressCount={inProgressCount}
+                      completedCount={completedCount}
+                      completeIssue={completeIssue}
+                      deleteIssue={deleteIssue}
+                    />
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Container>
+          </Col>
+        </BrowserRouter>
       </Row>
     </>
   );
