@@ -3,13 +3,16 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 const defaultIssue = {
   title: '',
   subTitle: '',
   assignedTo: '',
-  startDate: '',
-  endDate: '',
+  startDate: new Date(),
+  endDate: new Date(),
   priority: 'low',
   status: 'new',
   completedPercentage: 1,
@@ -226,12 +229,19 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
             </Form.Label>
           </Col>
           <Col sm={3}>
-            <Form.Control
+            <DatePicker
               type="date"
-              onChange={handleChange}
+              selected={startDate}
+              selectsStart
+              minDate={startDate}
+              onChange={(date) =>
+                setIssue({
+                  ...issue,
+                  startDate: date,
+                })
+              }
               name="startDate"
               value={startDate}
-              placeholder="Enter Start Date"
               isInvalid={errorStartDate}
             />
             <Form.Control.Feedback type="invalid" className="d-block">
@@ -247,13 +257,20 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
                 </Form.Label>
               </Col>
               <Col sm={9}>
-                <Form.Control
+                <DatePicker
                   type="date"
-                  onChange={handleChange}
+                  selected={endDate}
+                  selectsEnd
+                  onChange={(date) =>
+                    setIssue({
+                      ...issue,
+                      endDate: date,
+                    })
+                  }
                   name="endDate"
                   value={endDate}
-                  placeholder="Enter end Date"
                   isInvalid={errorEndDate}
+                  minDate={startDate}
                 />
                 <Form.Control.Feedback type="invalid" className="d-block">
                   {errorEndDate}

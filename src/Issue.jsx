@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 import { useNavigate } from 'react-router-dom';
 
+import { format } from 'date-fns';
+
 const Issue = ({ issue, completeIssue, deleteIssue }) => {
   const navigate = useNavigate();
   const {
@@ -75,7 +77,7 @@ const Issue = ({ issue, completeIssue, deleteIssue }) => {
           </Badge>
         </td>
         <td>{completedStatus}</td>
-        <td>{endDate}</td>
+        <td>{format(new Date(endDate), 'dd/MM/yyyy')}</td>
         <td>{assignedTo}</td>
         <td>
           {

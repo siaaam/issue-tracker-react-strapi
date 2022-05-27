@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { v4 as uuid } from 'uuid';
 import { useNavigate, useParams } from 'react-router-dom';
-import NotFound from './NotFound';
+import NotFound from '../NotFound';
 
 const defaultIssue = {
   title: '',
