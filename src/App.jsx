@@ -84,6 +84,10 @@ function App() {
       if (issueToUpdate.id === issue.id) {
         return {
           ...issueToUpdate,
+          status:
+            parseInt(issueToUpdate.completedPercentage) < 100
+              ? 'inProgress'
+              : issueToUpdate.status,
           id: issue.id,
         };
       } else {
