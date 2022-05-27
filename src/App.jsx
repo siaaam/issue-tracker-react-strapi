@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Navigation from './Navigation';
 import Issues from './issues';
-import AddIssue from './AddIssue';
+
 import Home from './Home';
 
 import { Row, Col, Container } from 'react-bootstrap';
@@ -14,7 +14,9 @@ import { ToastContainer } from 'react-toastify';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
+
 import EditIssue from './EditIssue';
+import AddIssue from './AddIssue';
 
 function App() {
   const [issues, setIssues] = useState([
@@ -77,10 +79,7 @@ function App() {
   };
 
   const updateIssue = (issueToUpdate) => {
-    console.log(issueToUpdate);
-    console.log(issues);
     const issuesAfterUpdate = issues.map((issue) => {
-      console.log(issue);
       if (issueToUpdate.id === issue.id) {
         return {
           ...issueToUpdate,
@@ -94,7 +93,6 @@ function App() {
         return issue;
       }
     });
-    console.log(issuesAfterUpdate);
     setIssues(issuesAfterUpdate);
   };
 
