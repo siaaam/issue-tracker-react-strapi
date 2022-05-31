@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import TextInput from './formInputs/TextInput';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -155,50 +156,26 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
     <>
       <h1>{issueToEdit ? 'Edit Issue' : 'Add Issue'}</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={3}>
-            <Form.Label htmlFor="title" column>
-              Title
-            </Form.Label>
-          </Col>
-          <Col sm={9}>
-            <Form.Control
-              type="text"
-              name="title"
-              id="title"
-              onChange={handleChange}
-              value={title}
-              placeholder="Enter Your Task Name"
-              isInvalid={errorTitle}
-            />
-            <Form.Control.Feedback type="invalid" className="d-block">
-              {errorTitle}
-            </Form.Control.Feedback>
-          </Col>
-        </Form.Group>
+        <TextInput
+          label="Title"
+          type="text"
+          name="title"
+          onChange={handleChange}
+          value={title}
+          placeholder="Enter Your Task Name"
+          error={errorTitle}
+        />
 
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={3}>
-            <Form.Label htmlFor="subTitle" column>
-              Sub Title{' '}
-            </Form.Label>
-          </Col>
-          <Col sm={9}>
-            <Form.Control
-              as="textarea"
-              type="text"
-              name="subTitle"
-              id="subTitle"
-              onChange={handleChange}
-              value={subTitle}
-              placeholder="Enter Your Task Details"
-              isInvalid={errorSubTitle}
-            />
-            <Form.Control.Feedback type="invalid" className="d-block">
-              {errorSubTitle}
-            </Form.Control.Feedback>
-          </Col>
-        </Form.Group>
+        <TextInput
+          label="Subtitle"
+          type="text"
+          name="subTitle"
+          onChange={handleChange}
+          value={subTitle}
+          placeholder="Enter Your Task Details"
+          error={errorSubTitle}
+          as="textarea"
+        />
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={3}>
