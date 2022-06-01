@@ -8,6 +8,7 @@ import TextInput from './formInputs/TextInput';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import DateInput from './formInputs/DateInput';
+import CheckInput from './formInputs/CheckInput';
 
 const defaultIssue = {
   title: '',
@@ -238,79 +239,65 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
           </Col>
         </Form.Group>
 
+        {/* Priority */}
         <Form.Group className="mb-3">
           <Row>
             <Col sm={3}>
               <Form.Label htmlFor="priority">Priority</Form.Label>
             </Col>
-            <Col sm="auto">
-              <Form.Check
-                type="radio"
-                value="low"
-                label="Low"
-                name="priority"
-                onChange={handleChange}
-                checked={priority === 'low'}
-              />
-            </Col>
-            <Col sm="auto">
-              <Form.Check
-                type="radio"
-                value="high"
-                label="High"
-                name="priority"
-                onChange={handleChange}
-                checked={priority === 'high'}
-              />
-            </Col>
-            <Col sm="auto">
-              <Form.Check
-                type="radio"
-                value="medium"
-                label="Medium"
-                name="priority"
-                onChange={handleChange}
-                checked={priority === 'medium'}
-              />
-            </Col>
+            <CheckInput
+              name="priority"
+              label="Low"
+              value="low"
+              onChange={handleChange}
+              valueToChecked={priority}
+            />
+
+            <CheckInput
+              name="priority"
+              label="High"
+              value="high"
+              onChange={handleChange}
+              valueToChecked={priority}
+            />
+
+            <CheckInput
+              name="priority"
+              label="Medium"
+              value="medium"
+              onChange={handleChange}
+              valueToChecked={priority}
+            />
           </Row>
         </Form.Group>
 
+        {/* Status */}
         <Form.Group className="mb-3">
           <Row>
             <Col sm={3}>
               <Form.Label htmlFor="status">Status</Form.Label>
             </Col>
-            <Col sm="auto">
-              <Form.Check
-                type="radio"
-                value="inProgress"
-                label="InProgress"
-                name="status"
-                onChange={handleChange}
-                checked={status === 'inProgress'}
-              />
-            </Col>
-            <Col sm="auto">
-              <Form.Check
-                type="radio"
-                value="completed"
-                label="Completed"
-                name="status"
-                onChange={handleChange}
-                checked={status === 'completed'}
-              />
-            </Col>
-            <Col sm="auto">
-              <Form.Check
-                type="radio"
-                value="new"
-                label="New"
-                name="status"
-                onChange={handleChange}
-                checked={status === 'new'}
-              />
-            </Col>
+            <CheckInput
+              name="status"
+              label="InProgress"
+              value="inProgress"
+              onChange={handleChange}
+              valueToChecked={status}
+            />
+            <CheckInput
+              name="status"
+              label="Completed"
+              value="completed"
+              onChange={handleChange}
+              valueToChecked={status}
+            />
+            <CheckInput
+              name="status"
+              label="New"
+              value="new"
+              onChange={handleChange}
+              valueToChecked={status}
+            />
           </Row>
         </Form.Group>
 
