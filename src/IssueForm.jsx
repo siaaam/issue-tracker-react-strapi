@@ -154,6 +154,49 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
     startDate: errorStartDate,
     endDate: errorEndDate,
   } = errors;
+
+  const statusValues = [
+    {
+      name: 'status',
+      label: 'InProgress',
+      value: 'inProgress',
+      valueToChecked: status,
+    },
+    {
+      name: 'status',
+      label: 'Completed',
+      value: 'completed',
+      valueToChecked: status,
+    },
+    {
+      name: 'status',
+      label: 'New',
+      value: 'new',
+      valueToChecked: status,
+    },
+  ];
+
+  const priorityValues = [
+    {
+      name: 'priority',
+      label: 'Low',
+      value: 'low',
+      valueToChecked: priority,
+    },
+    {
+      name: 'priority',
+      label: 'High',
+      value: 'high',
+      valueToChecked: priority,
+    },
+    {
+      name: 'priority',
+      label: 'Medium',
+      value: 'medium',
+      valueToChecked: priority,
+    },
+  ];
+
   return (
     <>
       <h1>{issueToEdit ? 'Edit Issue' : 'Add Issue'}</h1>
@@ -245,29 +288,16 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
             <Col sm={3}>
               <Form.Label htmlFor="priority">Priority</Form.Label>
             </Col>
-            <CheckInput
-              name="priority"
-              label="Low"
-              value="low"
-              onChange={handleChange}
-              valueToChecked={priority}
-            />
-
-            <CheckInput
-              name="priority"
-              label="High"
-              value="high"
-              onChange={handleChange}
-              valueToChecked={priority}
-            />
-
-            <CheckInput
-              name="priority"
-              label="Medium"
-              value="medium"
-              onChange={handleChange}
-              valueToChecked={priority}
-            />
+            {priorityValues.map((elm, idx) => (
+              <CheckInput
+                key={idx}
+                name={elm.name}
+                label={elm.label}
+                value={elm.value}
+                onChange={handleChange}
+                valueToChecked={elm.valueToChecked}
+              />
+            ))}
           </Row>
         </Form.Group>
 
@@ -277,27 +307,17 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
             <Col sm={3}>
               <Form.Label htmlFor="status">Status</Form.Label>
             </Col>
-            <CheckInput
-              name="status"
-              label="InProgress"
-              value="inProgress"
-              onChange={handleChange}
-              valueToChecked={status}
-            />
-            <CheckInput
-              name="status"
-              label="Completed"
-              value="completed"
-              onChange={handleChange}
-              valueToChecked={status}
-            />
-            <CheckInput
-              name="status"
-              label="New"
-              value="new"
-              onChange={handleChange}
-              valueToChecked={status}
-            />
+
+            {statusValues.map((elm, idx) => (
+              <CheckInput
+                key={idx}
+                name={elm.name}
+                label={elm.label}
+                value={elm.value}
+                onChange={handleChange}
+                valueToChecked={elm.valueToChecked}
+              />
+            ))}
           </Row>
         </Form.Group>
 
