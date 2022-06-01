@@ -9,6 +9,7 @@ import TextInput from './formInputs/TextInput';
 import 'react-datepicker/dist/react-datepicker.css';
 import DateInput from './formInputs/DateInput';
 import CheckInput from './formInputs/CheckInput';
+import CommonCheckInput from './formInputs/CommonCheckInput';
 
 const defaultIssue = {
   title: '',
@@ -282,44 +283,18 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
           </Col>
         </Form.Group>
 
-        {/* Priority */}
-        <Form.Group className="mb-3">
-          <Row>
-            <Col sm={3}>
-              <Form.Label htmlFor="priority">Priority</Form.Label>
-            </Col>
-            {priorityValues.map((elm, idx) => (
-              <CheckInput
-                key={idx}
-                name={elm.name}
-                label={elm.label}
-                value={elm.value}
-                onChange={handleChange}
-                valueToChecked={elm.valueToChecked}
-              />
-            ))}
-          </Row>
-        </Form.Group>
-
-        {/* Status */}
-        <Form.Group className="mb-3">
-          <Row>
-            <Col sm={3}>
-              <Form.Label htmlFor="status">Status</Form.Label>
-            </Col>
-
-            {statusValues.map((elm, idx) => (
-              <CheckInput
-                key={idx}
-                name={elm.name}
-                label={elm.label}
-                value={elm.value}
-                onChange={handleChange}
-                valueToChecked={elm.valueToChecked}
-              />
-            ))}
-          </Row>
-        </Form.Group>
+        {/* priority input field */}
+        <CommonCheckInput
+          label="priority"
+          valueToIterate={priorityValues}
+          onChange={handleChange}
+        />
+        {/* status input field */}
+        <CommonCheckInput
+          label="status"
+          valueToIterate={statusValues}
+          onChange={handleChange}
+        />
 
         <Form.Group className="mb-3">
           <Row>
