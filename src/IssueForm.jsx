@@ -177,27 +177,15 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
           as="textarea"
         />
 
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={3}>
-            <Form.Label htmlFor="assignedTo" column>
-              Assign To
-            </Form.Label>
-          </Col>
-          <Col sm={9}>
-            <Form.Control
-              type="text"
-              name="assignedTo"
-              id="assignedTo"
-              onChange={handleChange}
-              value={assignedTo}
-              placeholder="Whom You Are Assigned To"
-              isInvalid={errorAssignedTo}
-            />
-            <Form.Control.Feedback type="invalid" className="d-block">
-              {errorAssignedTo}
-            </Form.Control.Feedback>
-          </Col>
-        </Form.Group>
+        <TextInput
+          label="Assigned To"
+          type="text"
+          name="assignedTo"
+          onChange={handleChange}
+          value={assignedTo}
+          placeholder="Whom You Are Assigned To"
+          error={errorAssignedTo}
+        />
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={3}>
