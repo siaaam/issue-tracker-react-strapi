@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Table } from 'react-bootstrap';
+import { IssueContext } from './context/IssueContext';
 import Issue from './Issue';
 import IssueBar from './IssueBar';
 
-const Issues = ({
-  issues,
-  totalCount,
-  newCount,
-  inProgressCount,
-  completedCount,
-  completeIssue,
-  deleteIssue,
-}) => {
+const Issues = ({ totalCount, newCount, inProgressCount, completedCount }) => {
+  const { issues } = useContext(IssueContext);
+  console.log(issues);
   return (
     <>
       <h2>All Issues...</h2>
@@ -36,12 +31,7 @@ const Issues = ({
         </thead>
         <tbody>
           {issues.map((issue) => (
-            <Issue
-              key={issue.id}
-              issue={issue}
-              completeIssue={completeIssue}
-              deleteIssue={deleteIssue}
-            />
+            <Issue key={issue.id} issue={issue} />
           ))}
         </tbody>
       </Table>

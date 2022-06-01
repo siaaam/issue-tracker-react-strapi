@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { FaTrash, FaCheckSquare, FaEdit } from 'react-icons/fa';
 
@@ -9,8 +9,10 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 import { format } from 'date-fns';
+import { IssueContext } from './context/IssueContext';
 
-const Issue = ({ issue, completeIssue, deleteIssue }) => {
+const Issue = ({ issue }) => {
+  const { completeIssue, deleteIssue } = useContext(IssueContext);
   const navigate = useNavigate();
   const {
     id,
