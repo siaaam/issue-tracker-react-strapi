@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import TextInput from './formInputs/TextInput';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import DateInput from './formInputs/DateInput';
 
 const defaultIssue = {
   title: '',
@@ -194,11 +195,8 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
             </Form.Label>
           </Col>
           <Col sm={3}>
-            <DatePicker
-              type="date"
+            <DateInput
               selected={startDate}
-              selectsStart
-              minDate={startDate}
               onChange={(date) =>
                 setIssue({
                   ...issue,
@@ -206,12 +204,11 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
                 })
               }
               name="startDate"
+              minDate={startDate}
               value={startDate}
-              isInvalid={errorStartDate}
+              error={errorStartDate}
+              selectsStart
             />
-            <Form.Control.Feedback type="invalid" className="d-block">
-              {errorStartDate}
-            </Form.Control.Feedback>
           </Col>
 
           <Col sm={6}>
@@ -222,10 +219,8 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
                 </Form.Label>
               </Col>
               <Col sm={9}>
-                <DatePicker
-                  type="date"
+                <DateInput
                   selected={endDate}
-                  selectsEnd
                   onChange={(date) =>
                     setIssue({
                       ...issue,
@@ -233,13 +228,11 @@ const IssueForm = ({ addIssue, updateIssue, issue: issueToEdit }) => {
                     })
                   }
                   name="endDate"
-                  value={endDate}
-                  isInvalid={errorEndDate}
                   minDate={startDate}
+                  value={endDate}
+                  error={errorEndDate}
+                  selectsEnd
                 />
-                <Form.Control.Feedback type="invalid" className="d-block">
-                  {errorEndDate}
-                </Form.Control.Feedback>
               </Col>
             </Row>
           </Col>
