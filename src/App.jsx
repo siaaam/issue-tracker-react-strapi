@@ -1,16 +1,20 @@
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
-import Navigation from './Navigation';
-import Issues from './issues';
-import Home from './Home';
+
 import { Row, Col, Container } from 'react-bootstrap';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import NotFound from './NotFound';
 import EditIssue from './EditIssue';
 import AddIssue from './AddIssue';
+import Navigation from './Navigation';
+import Issues from './issues';
+import Home from './Home';
+import Register from './auth/Register';
+import Login from './auth/Login';
 
 function App() {
   const [totalCount, setTotalCount] = useState(0);
@@ -36,6 +40,8 @@ function App() {
                 <Route path="/" index element={<Home />} />
                 <Route path="/add" element={<AddIssue />} />
                 <Route path="/edit/:id" element={<EditIssue />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
                 <Route
                   path="/issues"
                   element={
