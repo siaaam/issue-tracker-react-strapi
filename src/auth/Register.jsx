@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 const schema = yup
   .object({
@@ -23,6 +26,8 @@ const schema = yup
   .required();
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { saveAuthInfo } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -31,7 +36,26 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
-  const submit = (data) => {
+  const submit = async (data) => {
+    const { username, password, email } = data;
+    //   send api request to the server
+
+    try {
+      const res = await axios.post(
+        'http://localhost:1337/api/auth/local/register',
+        {
+          username,
+          email,
+          password,
+        }
+      );
+      saveAuthInfo(res.data);
+      console.log(res.data);
+      navigate('/issues');
+    } catch (err) {
+      console.log(err);
+      console.log(err.response);
+    }
     console.log(data);
   };
 
