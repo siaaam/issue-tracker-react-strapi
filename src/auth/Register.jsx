@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const schema = yup
   .object({
@@ -50,13 +51,13 @@ const Register = () => {
         }
       );
       saveAuthInfo(res.data);
-      console.log(res.data);
+      toast.success('account created successfully');
       navigate('/issues');
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.error.message);
       console.log(err.response);
     }
-    console.log(data);
   };
 
   return (

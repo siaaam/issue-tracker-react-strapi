@@ -6,7 +6,6 @@ import IssueBar from './IssueBar';
 
 const Issues = ({ totalCount, newCount, inProgressCount, completedCount }) => {
   const { issues } = useContext(IssueContext);
-  console.log(issues);
   return (
     <>
       <h2>All Issues...</h2>
