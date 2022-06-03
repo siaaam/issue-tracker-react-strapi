@@ -51,12 +51,11 @@ const Register = () => {
         }
       );
       saveAuthInfo(res.data);
-      toast.success('account created successfully');
+      toast.success('Registration Successful');
       navigate('/issues');
     } catch (err) {
-      console.log(err);
       toast.error(err.response.data.error.message);
-      console.log(err.response);
+      console.log(err);
     }
   };
 
