@@ -2,11 +2,18 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Row, Col, Container } from 'react-bootstrap';
-import { useState } from 'react';
-import { ToastContainer } from 'react-toastify';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Row, Col, Container, Spinner } from 'react-bootstrap';
+import { useContext, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
 
+import { AuthContext } from './context/AuthContext';
 import NotFound from './NotFound';
 import EditIssue from './EditIssue';
 import AddIssue from './AddIssue';
@@ -15,6 +22,40 @@ import Issues from './issues';
 import Home from './Home';
 import Register from './auth/Register';
 import Login from './auth/Login';
+
+const AuthRequired = ({ children }) => {
+  const { user, userLoaded } = useContext(AuthContext);
+
+  if (userLoaded) {
+    if (!user) {
+      return <Navigate to="/login" />;
+    } else {
+      return children;
+    }
+  } else {
+    return (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
+  }
+};
+
+const PublicRoute = ({ children }) => {
+  // const location = useLocation();
+  const { user, userLoaded } = useContext(AuthContext);
+  if (userLoaded) {
+    if (!user) {
+      return children;
+    } else {
+      return <Navigate to="/issues" />;
+    }
+  } else {
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>;
+  }
+};
 
 function App() {
   const [totalCount, setTotalCount] = useState(0);
@@ -38,19 +79,49 @@ function App() {
             <Container>
               <Routes>
                 <Route path="/" index element={<Home />} />
-                <Route path="/add" element={<AddIssue />} />
-                <Route path="/edit/:id" element={<EditIssue />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/add"
+                  element={
+                    <AuthRequired>
+                      <AddIssue />
+                    </AuthRequired>
+                  }
+                />
+                <Route
+                  path="/edit/:id"
+                  element={
+                    <AuthRequired>
+                      <EditIssue />
+                    </AuthRequired>
+                  }
+                />
+                <Route
+                  path="/register"
+                  element={
+                    <PublicRoute>
+                      <Register />
+                    </PublicRoute>
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <PublicRoute>
+                      <Login />
+                    </PublicRoute>
+                  }
+                />
                 <Route
                   path="/issues"
                   element={
-                    <Issues
-                      totalCount={totalCount}
-                      newCount={newCount}
-                      inProgressCount={inProgressCount}
-                      completedCount={completedCount}
-                    />
+                    <AuthRequired>
+                      <Issues
+                        totalCount={totalCount}
+                        newCount={newCount}
+                        inProgressCount={inProgressCount}
+                        completedCount={completedCount}
+                      />
+                    </AuthRequired>
                   }
                 />
                 <Route path="*" element={<NotFound />} />

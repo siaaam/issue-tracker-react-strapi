@@ -1,28 +1,36 @@
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
 import useToken from '../hooks/useToken';
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userLoaded, setUserLoaded] = useState(false);
   const { token, loaded } = useToken();
 
   async function loadUser() {
-    const res = await axios.get('http://localhost:1337/api/users/me', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      const res = await axios.get('http://localhost:1337/api/users/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const info = res.data;
 
-    console.log(res.data);
-    const info = res.data;
-
-    setUser({
-      id: info.id,
-      username: info.username,
-      email: info.email,
-    });
+      setUser({
+        id: info.id,
+        username: info.username,
+        email: info.email,
+      });
+    } catch (err) {
+      toast.error('please login before taking action');
+      console.log(err);
+      console.log(err.response);
+    } finally {
+      setUserLoaded(true);
+    }
   }
 
   const removeAuthInfo = () => {
@@ -50,6 +58,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     saveAuthInfo,
     removeAuthInfo,
+    userLoaded,
     user,
   };
 
