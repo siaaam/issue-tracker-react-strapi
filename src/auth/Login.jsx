@@ -3,7 +3,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
@@ -21,6 +21,8 @@ const schema = yup
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { saveAuthInfo } = useContext(AuthContext);
   const {
     register,
@@ -32,6 +34,7 @@ const Login = () => {
 
   const submit = async (data) => {
     const { password, email } = data;
+
     //   send api request to the server
 
     try {
@@ -41,7 +44,7 @@ const Login = () => {
       });
       saveAuthInfo(res.data);
       toast.success('Login Successful');
-      navigate('/issues');
+      navigate(location?.state?.from || '/issues');
     } catch (err) {
       toast.error(err.response.data.error.message);
       console.log(err);

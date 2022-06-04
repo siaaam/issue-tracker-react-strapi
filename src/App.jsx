@@ -25,10 +25,11 @@ import Login from './auth/Login';
 
 const AuthRequired = ({ children }) => {
   const { user, userLoaded } = useContext(AuthContext);
+  const location = useLocation();
 
   if (userLoaded) {
     if (!user) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/login" state={{ from: location.pathname }} />;
     } else {
       return children;
     }
@@ -42,13 +43,12 @@ const AuthRequired = ({ children }) => {
 };
 
 const PublicRoute = ({ children }) => {
-  // const location = useLocation();
   const { user, userLoaded } = useContext(AuthContext);
   if (userLoaded) {
     if (!user) {
       return children;
     } else {
-      return <Navigate to="/issues" />;
+      return <Navigate to={location?.state?.from || '/issues'} />;
     }
   } else {
     <Spinner animation="border" role="status">
